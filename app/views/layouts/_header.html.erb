@@ -9,14 +9,11 @@
       <section class="top-bar-section">
         <!-- Right Nav Section -->
         <ul class="right">
-          <li><a href="#">Trading</a></li>
-          <li><a href="#">Verwaltung</a></li>
-          <li class="has-dropdown">
-            <a href="#">Verwaltung</a>
-            <ul class="dropdown">
-              <li><a href="#">First link in dropdown</a></li>
-              <li><a href="#">Active link in dropdown</a></li>
-            </ul>
+          <li>
+            <%= link_to "Verwaltung", management_path %>
+          </li>
+          <li>
+            <%= link_to "Handel", trades_path %>
           </li>
         </ul>
 
