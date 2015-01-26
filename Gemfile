@@ -31,6 +31,16 @@ gem 'devise'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'foundation-rails'
 
+group :development, :test do
+  gem 'pry-byebug', '~>2.0.0'
+  gem 'pry-stack_explorer'
+  gem 'pry-rails'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+
+end
 # Use unicorn as the app server
 # gem 'unicorn'
 
