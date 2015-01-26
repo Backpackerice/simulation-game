@@ -1,0 +1,32 @@
+<div class =  "l-content">
+  <div class = "l-login-form large-4 columns">
+    <h2>Log in</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field row collapse">
+        <div class = "large-2 columns">
+          <%= f.label :email , class: " prefix"%>
+        </div>
+        <div class = "large-10 columns" >
+          <%= f.email_field :email, placeholder: "Bitte Email eingeben", autofocus: true%>
+        </div>
+      </div>
+      <div class="field row collapse">
+        <div class = "large-2 columns">
+          <%= f.label :password, class: "prefix" %>
+        </div>
+        <div class = "large-10 columns" >
+        <%= f.password_field :password, placeholder: "Bitte Passwort eingeben", autocomplete: "off" %>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "Jetzt Einloggen!" , class: "button radius expand"%>
+      </div>
+
+    <% end %>
+    <div class="sep">
+      <span class="or">OR</span>
+    </div>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
