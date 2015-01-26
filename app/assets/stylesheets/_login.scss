@@ -1,0 +1,57 @@
+.l-login-form{
+
+  position: absolute;
+  margin-top: 70px;
+  left: 30%;
+  top: 30%;
+  border-radius: 15px;
+  background: rgba(34, 34, 34, 0.7);
+
+  .button.small{
+    position: relative;
+    margin-left: -50px;
+    left: 50%;
+  }
+  label{
+    display: inline-block;
+  }
+  h2 {
+    color: white;
+    text-align: center;
+  }
+  .remember{
+    color: white;
+  }
+  #user_email {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  #user_password {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  #user_password_confirmation{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  label {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .sep {
+      border: 1px solid white;
+      position: relative;
+      margin: 35px 20px;
+  }
+
+  .or {
+      position: absolute;
+      width: 50px;
+      left: 50%;
+      color: white;
+      text-align: center;
+      margin: 0 0 0 -25px;
+      line-height: 20px;
+  }
+}
