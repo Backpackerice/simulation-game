@@ -10,10 +10,14 @@
         <!-- Right Nav Section -->
         <ul class="right">
           <li>
-            <%= link_to "Verwaltung", management_path %>
+            <% if current_user %>
+              <%= link_to "Verwaltung", management_path %>
+            <% end %>
           </li>
           <li>
-            <%= link_to "Handel", trades_path %>
+            <% if current_user %>
+              <%= link_to "Handel", trades_path %>
+            <% end %>
           </li>
         </ul>
 

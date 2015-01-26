@@ -1,4 +1,4 @@
-class Dahsboard
+class Dashboard
   def initliaze()
 
   end

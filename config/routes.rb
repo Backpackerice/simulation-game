@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'dashboard' => 'dashboard#index', as: :dashboard
-  get 'management' => 'management#index', as: :management
-  get 'trades' => 'trades#index', as: :trades
   root 'dashboard#index'
+
+  get 'dashboard' => 'dashboard#index', as: :dashboard
+  get 'trades' => 'trades#index', as: :trades
+
+  # management routes
+  get 'management' => 'management#index', as: :management
+  post 'abbauen' => 'management#harvest', as: :harvest
+  post 'spritzen' => 'management#spray', as: :spray
+  post 'melken' => 'management#milk', as: :milk
+  post 'schlachten' => 'management#butcher', as: :butcher
+  post 'reparieren' => 'management#maintain', as: :maintenance
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

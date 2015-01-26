@@ -1,136 +1,107 @@
 <div class="l-content">
-	<div class="medium-9 columns">
 	<h4 style="text-align: center;">Verwaltung</h4>
-	<div id="landwirtschaft">
-		<h5>Felder</h5>
-		<table style="width: 100%;">
-			<thead>
-				<tr>
-					<th width="50">Status (Icon)</th>
-					<th width="150">Angeplfanzt:</th>
-					<th>Menge</th>
-					<th>Wert</th>
-					<th>Alter (in Saison)</th>
-					<th width="200">Abbauen</th>
-					<th width="200">Pestizide</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Icon</td>
-					<td><b>Weizen</b></td>
-					<td>50.000</td>
-					<td>50000€</td>
-					<td>2</td>
-					<td><a href="#">abbauen</td>
-					<td><a href="#">spritzen</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td><b>Mais</b></td>
-					<td>20.000</td>
-					<td>20000€</td>
-					<td>1</td>
-					<td><a href="#">abbauen</td>
-					<td><a href="#">spritzen</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td><b>Weizen</b></td>
-					<td>50.000</td>
-					<td>50000€</td>
-					<td>0</td>
-					<td><a href="#">abbauen</td>
-					<td><a href="#">spritzen</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td colspan="6" style="text-align: center;"><a href="#">anbauen</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td colspan="6" style="text-align: center;"><a href="#">anbauen</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class = "row" >
+		<div class="medium-9 columns">
+			<h5>Felder</h5>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Status</th>
+						<th>Sorte</th>
+						<th>Angeplfanzt:</th>
+						<th>Menge</th>
+						<th>Wert</th>
+						<th>Alter (in Saison)</th>
+						<th>Abbauen</th>
+						<th>Pestizide</th>
+					</tr>
+				</thead>
+				<tbody>
+	      <% @crops.each do |crop| %>
+					<tr>
+						<td><i class = "#{crop.type.downcase}-icon"> </i></td>
+						<td><b><%= crop.type %></b></td>
+						<td><%= crop.quantity %></td>
+						<td><%= number_to_currency(crop.value, unit: '€') %></td>
+						<td>Saison <%=  Game.data.period - crop.age %></td>
+						<td><%= link_to('Abbauen', harvest_path) %></td>
+						<td><%= link_to('Spritzen', spray_path) %></td>
+					</tr>
+	        <% end %>
+				</tbody>
+			</table>
+		</div>
+
+		<div class = "content-box medium-3 columns">
+		Hi from the index Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+		<hr/>
+		</div>
+
 	</div>
-	<div id="viehzucht">
-		<h5>Vieh</h5>
-		<table style="width: 100%;">
-			<thead>
-				<tr>
-					<th width="50">Status (Icon)</th>
-					<th width="150">Vieh</th>
-					<th>Menge</th>
-					<th>Wert</th>
-					<th width="200">Melken / Schlachter</th>
-					<th width="200">Impfen</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Icon</td>
-					<td><b>Milchkühe</b></td>
-					<td>300</td>
-					<td>4000€</td>
-					<td><a href="#">melken</td>
-					<td><a href="#">impfen</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td><b>Schweine</b></td>
-					<td>200</td>
-					<td>3000€</td>
-					<td><a href="#">zum Schlachter bringen</td>
-					<td><a href="#">impfen</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class = "row">
+		<div class="large-9 columns">
+			<h5>Vieh</h5>
+
+			<table>
+				<thead>
+					<tr>
+						<th width="50">Status</th>
+						<th width="50">Vieh</th>
+						<th>Menge</th>
+						<th>Wert</th>
+						<th width="150">Alter:</th>
+						<th width="200">Melken / Schlachten</th>
+						<th width="200">Impfen</th>
+					</tr>
+				</thead>
+				<tbody>
+	      <% @lifestock.each do |animal| %>
+					<tr>
+						<td><i class = "#{animal.type.downcase}-icon"> </i></td>
+						<td><b><%= animal.type %></b></td>
+						<td><%= animal.quantity %></td>
+						<td><%= number_to_currency(animal.value, unit: '€') %></td>
+						<td><%= animal.age %></td>
+						<td><% if animal.type == "Kuh" %>
+										<%= link_to('Melken', milk_path) %>
+								<% else %>
+									<%= link_to('Schlachten', butcher_path) %>
+								<% end %>
+						</td>
+					</tr>
+	      <% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div id="technik">
-		<h5>Technik</h5>
-		<table style="width: 100%;">
-			<thead>
-				<tr>
-					<th width="50">Status (Icon)</th>
-					<th>Gerät</th>
-					<th>Wert</th>
-					<th>Alter (in Saison)</th>
-					<th width="200">Wartung</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Icon</td>
-					<td><b>Treker</b></td>
-					<td>1000€</td>
-					<td>2</td>
-					<td><a href="#">reparieren</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td><b>Treker</b></td>
-					<td>1000€</td>
-					<td>4</td>
-					<td><a href="#">reparieren</td>
-				</tr>
-				<tr>
-					<td>Icon</td>
-					<td><b>Mähdrescher</b></td>
-					<td>2000€</td>
-					<td>1</td>
-					<td><a href="#">reparieren</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class = "row">
+		<div class="large-9 columns">
+			<h5>Technik</h5>
+
+			<table>
+				<thead>
+					<tr>
+						<th width="50">Status (Icon)</th>
+						<th>Gerät</th>
+						<th>Wert</th>
+						<th>Alter (in Saison)</th>
+						<th width="200">Wartung</th>
+					</tr>
+				</thead>
+				<tbody>
+	      <% @machinery.each do |machine| %>
+					<tr>
+						<td><i class = "#{machine.type.downcase}-icon"> </i></td>
+						<td><b><%= machine.type %></b></td>
+						<td><%= number_to_currency(machine.value, unit: '€') %></td>
+						<td><%= machine.age %></td>
+						<td> <%= link_to('Reparieren', maintenance_path) %></td>
+					</tr>
+	      <% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<div class="medium-3 columns">
-	
-	
-	<span>put help text here?!</span><br />
-	Hi from the index Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-	<hr/>
-	
-</div>
+
 </div>
