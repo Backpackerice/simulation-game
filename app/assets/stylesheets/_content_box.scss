@@ -1,6 +1,5 @@
 .content-box{
   border: 10px;
-  display: inline-block;
   float: left;
   padding: 10px 10px;
   margin: 10px 10px;
@@ -10,13 +9,8 @@
   min-width: 300px;
   box-sizing: border-box;
 
-  .wide {
-    float: none;
-    clear: left;
-    width: 100%;
-    max-width: 100%;
-  }
 }
 .content-box .wide {
   min-width: 58%;
 }
+
