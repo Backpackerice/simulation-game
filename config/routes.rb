@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post 'spritzen' => 'management#spray', as: :spray
   post 'melken' => 'management#milk', as: :milk
   post 'schlachten' => 'management#butcher', as: :butcher
+  post 'impfen' => 'management#vaccinate', as: :vaccinate
   post 'reparieren' => 'management#maintain', as: :maintenance
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
