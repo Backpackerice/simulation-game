@@ -20,7 +20,7 @@
 	      <% @crops.each do |crop| %>
 					<tr>
 						<td><div class="<%= crop.type.downcase  %>-icon"></div></td>
-						<td><b><%= crop.type %></b></td>
+						<td><b><%= crop.type.to_s %></b></td>
 						<td><%= crop.quantity %></td>
 						<td><%= number_to_currency(crop.value, unit: '€') %></td>
 						<td>Saison <%=  Game.data.period - crop.age %></td>
@@ -51,7 +51,7 @@
 	      <% @lifestock.each do |animal| %>
 					<tr>
 						<td><div class="<%= animal.type.downcase  %>-icon"></div></td>
-						<td><b><%= animal.type %></b></td>
+						<td><b><%= animal.type.to_s %></b></td>
 						<td><%= animal.quantity %></td>
 						<td><%= number_to_currency(animal.value, unit: '€') %></td>
 						<td><%= animal.age %></td>
@@ -85,7 +85,7 @@
 	      <% @machinery.each do |machine| %>
 					<tr>
 						<td><div class="<%= machine.type.downcase  %>-icon"></div></td>
-						<td><b><%= machine.type %></b></td>
+						<td><b><%= machine.type.to_s %></b></td>
 						<td><%= number_to_currency(machine.value, unit: '€') %></td>
 						<td><%= machine.age %></td>
 						<td> <%= link_to('Reparieren', maintenance_path) %></td>
