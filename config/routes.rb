@@ -13,9 +13,12 @@ Rails.application.routes.draw do
   post 'schlachten' => 'management#butcher', as: :butcher
   post 'impfen' => 'management#vaccinate', as: :vaccinate
   post 'reparieren' => 'management#maintain', as: :maintenance
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
+  devise_scope :user do
+    get '/api/current_user' => 'users/sessions#show_current_user', as :show_current_user
+    post '/api/check/is_user' => 'user/users#is_user', as :is_user
+  end
+  # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
