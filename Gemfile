@@ -31,6 +31,8 @@ gem 'devise'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'foundation-rails'
 
+gem 'angularjs-rails'
+gem 'ngmin-rails'
 group :development, :test do
   gem 'pry-byebug', '~>2.0.0'
   gem 'pry-stack_explorer'
