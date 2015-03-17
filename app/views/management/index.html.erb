@@ -1,105 +1,162 @@
-<div class="l-content">
-	<h4 style="text-align: center;">Verwaltung</h4>
-	<div class = "medium-9 columns">
-		<div class="medium-12 columns">
-			<h5>Felder</h5>
-
-			<table width="100%">
+<div class="l-content management">
+	<h2 class= "centered"> Ereignisse </h2>
+	<div class = "medium-12 large-12 columns">
+		<div class="medium-9 large-9 columns">
+			<table class= "event-table">
 				<thead>
 					<tr>
-						<th>Status</th>
-						<th>Sorte</th>
-						<th>Angeplfanzt:</th>
-						<th>Wert</th>
-						<th>Alter (in Saison)</th>
-						<th>Abbauen</th>
-						<th>Pestizide</th>
+						<th>Thema</th>
+						<th>Nachricht</th>
 					</tr>
 				</thead>
 				<tbody>
-	      <% @crops.each do |crop| %>
+	      <% @current_events.each do |event| %>
 					<tr>
-						<td><div class="<%= crop.type.downcase  %>-icon"></div></td>
-						<td><b><%= crop.type.to_s %></b></td>
-						<td><%= crop.quantity %></td>
-						<td><%= number_to_currency(crop.value, unit: '€') %></td>
-						<td>Saison <%=  Game.data.period - crop.age %></td>
-						<td><%= link_to('Abbauen', harvest_path) %></td>
-						<td><%= link_to('Spritzen', spray_path) %></td>
+						<td class = "centered"><div class="<%= event.type.downcase  %>-icon"></div> <%= Event.types_mapping.fetch(event.type)%></td>
+						<td><%= event.message %></td>
 					</tr>
-	        <% end %>
+	       <% end %>
 				</tbody>
 			</table>
+			<div class = "medium-6 large-6 columns ">
+				<div class = "report">
+					<h3> Finanzbericht </h3>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Ausgangslage
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Betrag zum Anfang des Spiels
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Zinsen
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Kosten laufender Zinsen
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Kredite
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Kredit einnahmen
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Einkauf
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Personal
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Produktion
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Maschinen
+						</div>
+					</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Verkauf
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Endlage
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class = "medium-6 large-6 columns">
+				<div class = "report">
+					<h3> Wichtige Zahlen auf einem Blick </h3>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Liquidationswert Ende letzten Jahres
+						</div>
+						<div class= "medium-6 large-6 columns">
+							245k Euro
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Saatgut
+						</div>
+						<div class= "medium-6 large-6 columns">
+							323
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Viehbestand
+						</div>
+						<div class= "medium-6 large-6 columns">
+							Ausgaenvnsfkjnkj
+						</div>
+					</div>
+						<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Personal
+						</div>
+						<div class= "medium-6 large-6 columns">
+							20 Mitarbeiter
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							bestellte Felder
+						</div>
+						<div class= "medium-6 large-6 columns">
+							3 h
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							Maschinenbesetzung
+						</div>
+						<div class= "medium-6 large-6 columns">
+							12
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<div class="medium-12 columns">
-			<h5>Vieh</h5>
-
-			<table width="100%">
-				<thead>
-					<tr>
-						<th>Status</th>
-						<th>Vieh</th>
-						<th>Menge</th>
-						<th>Wert</th>
-						<th>Alter:</th>
-						<th>Melken / Schlachten</th>
-						<th>Impfen</th>
-					</tr>
-				</thead>
-				<tbody>
-	      <% @lifestock.each do |animal| %>
-					<tr>
-						<td><div class="<%= animal.type.downcase  %>-icon"></div></td>
-						<td><b><%= animal.type.to_s %></b></td>
-						<td><%= animal.quantity %></td>
-						<td><%= number_to_currency(animal.value, unit: '€') %></td>
-						<td><%= animal.age %></td>
-						<td><% if animal.type == "Kuh" %>
-										<%= link_to('Melken', milk_path) %>
-								<% else %>
-									<%= link_to('Schlachten', butcher_path) %>
-								<% end %>
-						</td>
-						<td><%= link_to('Impfen', vaccinate_path) %></td>
-					</tr>
-	      <% end %>
-				</tbody>
-			</table>
+		<div class = "medium-3 large-3 columns">
+			<div class= "content-box ">
+				Hier siehst du deinen Übersichtsbildschirm deines Unternehmens. Neben den letzten aktuellen Nachrichten erhälst du zusätzlich einen kurzen Finanzbericht für das letzte Jahr und einen Überblick über wichtige Kennzahlen des Unternehmens. Unter anderem siehst du hier den Liquidationswert des Unternehmens. Die Finanz-, Produktions- und Verkaufsberichte des letzten Jahres sind ebenfalls auf dieser Seite verlinkt.
+			<hr/></div>
 		</div>
-
-		<div class="medium-12 columns">
-			<h5>Technik</h5>
-
-			<table width="100%">
-				<thead>
-					<tr>
-						<th width="50">Status</th>
-						<th>Gerät</th>
-						<th>Wert</th>
-						<th>Alter (in Saison)</th>
-						<th>Wartung</th>
-					</tr>
-				</thead>
-				<tbody>
-	      <% @machinery.each do |machine| %>
-					<tr>
-						<td><div class="<%= machine.type.downcase  %>-icon"></div></td>
-						<td><b><%= machine.type.to_s %></b></td>
-						<td><%= number_to_currency(machine.value, unit: '€') %></td>
-						<td><%= machine.age %></td>
-						<td> <%= link_to('Reparieren', maintenance_path) %></td>
-					</tr>
-	      <% end %>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class = "medium-3 columns">
-		<div class= "content-box ">
-			Hi from the index Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-		<hr/></div>
 	</div>
 </div>
+
 
 

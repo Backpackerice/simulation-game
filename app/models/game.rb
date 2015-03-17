@@ -1,15 +1,10 @@
 class Game < ActiveRecord::Base
 
   belongs_to :user
+  has_many :events
+  has_many :liabilities
+  has_many :assets
+  has_many :personnels
 
-  def self.data
-    Game.first
-  end
-
-  def self.update(args)
-    args.keys.each do |attribute|
-      self.data[attribute] = args[attribute]
-      Game.first.save
-    end
-  end
+  cattr_accessor :current_game
 end

@@ -1,8 +1,9 @@
 <div class= "header">
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "Simulation Game!", dashboard_path %></h1>
+        <li>
+          <div class="info">Cash ~ <%= current_user.game.cash %></div>
+          <div class="info">Saison <%= current_user.game.period %></div>
         </li>
       </ul>
 
@@ -16,7 +17,17 @@
           </li>
           <li>
             <% if current_user %>
-              <%= link_to "Handel", trades_path %>
+              <%= link_to "Bank", banking_path %>
+            <% end %>
+          </li>
+          <li>
+            <% if current_user %>
+              <%= link_to "Berichte", reports_path %>
+            <% end %>
+          </li>
+          <li>
+            <% if user_signed_in? %>
+              <%= link_to "Log Out", destroy_user_session_path %>
             <% end %>
           </li>
         </ul>

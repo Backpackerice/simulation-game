@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  period: 1
+  action: MyString
+  message: MyText
+  game_id: 1
+
+two:
+  period: 1
+  action: MyString
+  message: MyText
+  game_id: 1

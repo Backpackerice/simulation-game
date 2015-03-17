@@ -3,20 +3,30 @@
   top: 0;
   background-color: darkgray;
   height: 100%;
-  position:fixed;
   z-index: 1;
   opacity: 0.5;
   width: 13%;
+  .navigation {
+    list-style: none;
+    margin-top: 50px;
+    .nav-item {
+      font-size: 20px;
+      padding: 10px;
+      a{
+        color: white;
+        &:hover {
+          color: black;
+        }
+      }
+    }
 
+  }
 }
 
 .farm-logo {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 0;
-  left: 10px;
   height: 150px;
-  max-width: 13%;
   margin-top: 50px;
 
 }

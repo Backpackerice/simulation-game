@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  position: MyString
+  salary: 1
+  quantity: 1
+  period: 1
+  liability_id_id: 
+  game_id_id: 
+
+two:
+  position: MyString
+  salary: 1
+  quantity: 1
+  period: 1
+  liability_id_id: 
+  game_id_id: 

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  amount: 1
+  period: 1
+  description: MyText
+
+two:
+  type: 
+  amount: 1
+  period: 1
+  description: MyText

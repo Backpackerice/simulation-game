@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   get 'dashboard' => 'dashboard#index', as: :dashboard
-  get 'trades' => 'trades#index', as: :trades
+
+  get 'einkauf' => 'trades#index', as: :trades
+  get 'vertrieb' => 'sales#index', as: :sales
+  get 'produktion' => 'production#index', as: :production
+  get 'lager' => 'storage#index', as: :storage
+  get 'bericht' => 'reports#index', as: :reports
+  get 'bank' => 'banking#index', as: :banking
 
   # management routes
   get 'management' => 'management#index', as: :management
@@ -13,6 +19,8 @@ Rails.application.routes.draw do
   post 'schlachten' => 'management#butcher', as: :butcher
   post 'impfen' => 'management#vaccinate', as: :vaccinate
   post 'reparieren' => 'management#maintain', as: :maintenance
+  resources :personnels, only: [:index, :create]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

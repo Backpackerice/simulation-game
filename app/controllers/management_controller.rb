@@ -1,9 +1,11 @@
 class ManagementController < ApplicationController
 
   def index
-    @crops = current_user.crops
-    @machinery = current_user.machineries
-    @lifestock = current_user.lifestocks
+    if Game.current_game.period == 1
+      @current_events = Event.initial_events
+    else
+      @current_events = Event.recent
+    end
   end
 
   def spray

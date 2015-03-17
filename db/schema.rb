@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121183715) do
+ActiveRecord::Schema.define(version: 20150316214534) do
+
+  create_table "assets", force: true do |t|
+    t.string   "kind"
+    t.integer  "amount"
+    t.integer  "period"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "game_id"
+  end
 
   create_table "crops", force: true do |t|
     t.string  "type"
@@ -24,6 +34,16 @@ ActiveRecord::Schema.define(version: 20150121183715) do
 
   add_index "crops", ["user_id"], name: "index_crops_on_user_id"
 
+  create_table "events", force: true do |t|
+    t.integer  "period"
+    t.string   "action"
+    t.text     "message"
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
+  end
+
   create_table "games", force: true do |t|
     t.integer "period"
     t.decimal "cash",    precision: 2, scale: 0
@@ -31,6 +51,16 @@ ActiveRecord::Schema.define(version: 20150121183715) do
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id"
+
+  create_table "liabilities", force: true do |t|
+    t.string   "kind"
+    t.integer  "amount"
+    t.integer  "period"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "game_id"
+  end
 
   create_table "lifestocks", force: true do |t|
     t.string  "type"
@@ -52,6 +82,17 @@ ActiveRecord::Schema.define(version: 20150121183715) do
   end
 
   add_index "machineries", ["user_id"], name: "index_machineries_on_user_id"
+
+  create_table "personnels", force: true do |t|
+    t.string   "position"
+    t.integer  "salary"
+    t.integer  "quantity"
+    t.integer  "period"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "game_id"
+    t.integer  "liability_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

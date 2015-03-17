@@ -1,0 +1,39 @@
+<div class="l-content">
+  <h4 style="text-align: center;">Personalbestand</h4>
+  <div class = "medium-9 columns">
+    <div class="medium-12 columns">
+      <% if flash[:success] %>
+      <div class="flash"><%= flash[:success] %></div>
+      <%end%>
+      <%= form_tag personnels_path  do %>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Bereich</th>
+            <th>Saisonsgehalt pro Angestellten</th>
+            <th>Anzahl</th>
+          </tr>
+        </thead>
+          <tbody>
+            <% @personnel.each do |employee|%>
+          <tr>
+            <td> <%= employee.position %> </td>
+            <td><%= number_field_tag 'salary', number_to_currency(employee.salary, unit: '€'), step: 100 %></td>
+            <td> <%= number_field_tag 'quantity', employee.quantity %> </td>
+          </th>
+          <% end %>
+          </tbody>
+
+      </table>
+      <%= submit_tag "Speichern", class: "btn btn-large"%>
+    <% end %>
+    </div>
+  </div>
+
+  <div class = "medium-3 large-3 columns">
+      <div class= "content-box ">
+        Die Verwaltung des Personals ist eine der wichtigsten Aufgaben in deinem Unternehmen. Auf dieser Seite findest du eine Übersicht mit allen Mitarbeitern. Neben dem Tätigkeitsbereich siehst du auch das aktuelle Jahresgehalt die Anzahl der Mitarbeiter in jedem Bereich. Um Mitarbeiter einzustellen oder zu entlassen passe einfach die jeweilige Anzahl an. Je nachdem wie viele Mitarbeiter du einstellst und wie großzügig du ihr Gehalt bemisst schwankt ihre Produktivität und Leistung.
+      <hr/></div>
+    </div>
+</div>

@@ -4,9 +4,22 @@
     .title-area {
       margin-left: 14%;
     }
+    .right {
+      margin-right: 25px;
+      a {
+        font-size: 18px;
+        &:hover{
+          color: lightgrey;
+        }
+      }
+    }
   }
   .dropdown .active {
     background-color: darkgrey;
   }
-
+  .info {
+    float: left;
+    color: white;
+    padding: 10px;
+  }
  }
