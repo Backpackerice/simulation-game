@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   private
   def set_current_game!
     authenticate_user!
-    Game.current_game = Game.find_by(user: current_user)
+    if user_signed_in?
+      Game.current_game = Game.find_by(user: current_user)
+    end
     yield
   ensure
     Game.current_game = nil

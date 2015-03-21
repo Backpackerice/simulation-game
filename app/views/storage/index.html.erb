@@ -1,0 +1,116 @@
+<div class="l-content">
+  <h4 style="text-align: center;">Verwaltung</h4>
+  <div class = "medium-9 columns">
+    <div class="medium-12 columns">
+      <h5>Felder</h5>
+
+      <%= form_tag crops_path do %>
+        <table width="100%">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Sorte</th>
+              <th>Angeplfanzt:</th>
+              <th>Wert</th>
+              <th>Alter (in Saison)</th>
+              <th>Abbauen</th>
+              <th>Pestizide</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @crops.each do |crop| %>
+            <tr>
+              <td><div class="<%= crop.type.downcase  %>-icon"></div></td>
+              <td><b><%= crop.type.to_s %></b></td>
+              <td><%= crop.quantity %></td>
+              <td><%= number_to_currency(crop.value, unit: '€') %></td>
+              <td><%= crop.age %></td>
+              <td> Abbauen <%= number_field_tag "#{crop.type}[harvest]", crop.harvested, step: 100, max: crop.quantity%></td>
+              <td> Spritzen <%= number_field_tag "#{crop.type}[spray]", Crops.sprayed(crop.type).count , step: 100, max: crop.quantity%> </td>
+            </tr>
+           <% end %>
+          </tbody>
+        </table>
+      <%= submit_tag "Speichern", class: "button" %>
+      <% end %>
+    </div>
+
+    <div class="medium-12 columns">
+      <h5>Vieh</h5>
+
+      <%= form_tag lifestock_path do %>
+        <table width="100%">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Vieh</th>
+              <th>Menge</th>
+              <th>Wert</th>
+              <th>Alter:</th>
+              <th>Melken / Schlachten</th>
+              <th>Impfen</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @lifestock.each do |animal| %>
+            <tr>
+              <td><div class="<%= animal.type.downcase  %>-icon"></div></td>
+              <td><b><%= animal.type.to_s %></b></td>
+              <td><%= animal.quantity %></td>
+              <td><%= number_to_currency(animal.value, unit: '€') %></td>
+              <td><%= animal.age %></td>
+              <td><% if animal.type == "Cow" %>
+                      Melken <%= number_field_tag "#{animal.type}[:milk]", animal.butchered, step: 10, max: animal.quantity %>
+                  <% else %>
+                    Schlachten <%= number_field_tag "#{animal.type}[:butcher]", animal.butchered, step: 10, max: animal.quantity %>
+                  <% end %>
+              </td>
+              <td>Impfen <%= number_field_tag "#{animal.type}[:vaccinate]", Lifestock.vaccinated(animal.type).count, step: 10, max: animal.quantity %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <%= submit_tag "Speichern", class: "button" %>
+      <% end %>
+    </div>
+
+    <div class="medium-12 columns">
+      <h5>Technik</h5>
+      <%= form_tag machinery_path do %>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th width="50">Status</th>
+            <th>Gerät</th>
+            <th>Wert</th>
+            <th>Alter (in Saison)</th>
+            <th>Saisons seit letzter Wartung</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @machinery.each do |machine| %>
+          <tr>
+            <td><div class="<%= machine.type.downcase  %>-icon"></div></td>
+            <td><b><%= machine.type.to_s %></b></td>
+            <td><%= number_to_currency(machine.value, unit: '€') %></td>
+            <td><%= machine.age %></td>
+            <td> machine.periods_since_maintenance </td>
+            <td> Reparieren <%= check_box_tag "#{machine.type}[repair]", 'reparieren' %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= submit_tag "Speichern", class: "button"%>
+      <%end%>
+    </div>
+  </div>
+  <div class = "medium-3 columns">
+    <div class= "content-box ">
+      Im laufenden Betrieb ist es wichtig die Ressourcen deiner Farm gewinnbringend zu verwalten, dazu gehört vor allem die notwendigen Wartungsarbeiten vorzunehmen und dein Lager vor Risiken zu schützen, dies kostet zwar Geld, kann dich aber vor Risiken wie Krankheit und Schädlingen schützen. Zum Beispiel muss ein Traktor nicht ständig repariert werden, jedoch ist es sinnvoll dies nach 3 Jahren zu da ansonsten die Wahrscheinlichkeit, dass dieser ersetzt werden muss steigt. Falls du in der nächsten Saison Getreide oder Fleische verkaufen möchtest musst du diese jetzt ernten bzw. Schlachten.
+    <hr/></div>
+  </div>
+</div>
+
+
+
+

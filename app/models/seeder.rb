@@ -16,17 +16,17 @@ module Seeder
               ],
 }
 
-  PERSONELL_ATTRIBUTES_LIST = {
-    :personnel => [
+  PERSONELL_ATTRIBUTES_LIST = [
      {position: "Vertrieb", salary: 15000, quantity: 2, period: 1},
      {position: "Einkauf", salary: 12000, quantity: 2, period: 1},
      {position: "Lagerung", salary: 9000, quantity: 3, period: 1},
-     {position: "Produktion", salary: 6000, quantity: 6, period: 1}]
-  }
+     {position: "Produktion", salary: 6000, quantity: 6, period: 1}
+   ]
+
   def self.initialize_db(user)
 
     USER_ATTR_LIST.each do |key, params_array|
-
+      binding.pry
       params_array.each do |params|
         user.send( key ).create( params )
       end

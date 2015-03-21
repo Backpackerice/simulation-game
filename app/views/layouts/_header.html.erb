@@ -2,8 +2,12 @@
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li>
-          <div class="info">Cash ~ <%= current_user.game.cash %></div>
-          <div class="info">Saison <%= current_user.game.period %></div>
+          <% if current_user %>
+            <div class="info">Cash ~ <%= current_user.game.cash %></div>
+            <div class="info">Saison <%= current_user.game.period %></div>
+          <% else %>
+            <div class="info"> Wilkommen zum Simulation Game</div>
+          <% end %>
         </li>
       </ul>
 
@@ -27,7 +31,7 @@
           </li>
           <li>
             <% if user_signed_in? %>
-              <%= link_to "Log Out", destroy_user_session_path %>
+              <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
             <% end %>
           </li>
         </ul>

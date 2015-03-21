@@ -13,12 +13,11 @@ Rails.application.routes.draw do
 
   # management routes
   get 'management' => 'management#index', as: :management
-  post 'abbauen' => 'management#harvest', as: :harvest
-  post 'spritzen' => 'management#spray', as: :spray
-  post 'melken' => 'management#milk', as: :milk
-  post 'schlachten' => 'management#butcher', as: :butcher
-  post 'impfen' => 'management#vaccinate', as: :vaccinate
-  post 'reparieren' => 'management#maintain', as: :maintenance
+
+  post 'getreide' => 'storage#crops', as: :crops
+  post 'vieh' => 'storage#lifestock', as: :lifestock
+  post 'technik' => 'storage#machinery', as: :machinery
+
   resources :personnels, only: [:index, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.

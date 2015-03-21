@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316214534) do
+ActiveRecord::Schema.define(version: 20150319202935) do
 
   create_table "assets", force: true do |t|
     t.string   "kind"
@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(version: 20150316214534) do
   create_table "crops", force: true do |t|
     t.string  "type"
     t.integer "quantity"
-    t.decimal "unit_value",              precision: 5, scale: 0
+    t.integer "unit_value",              limit: 5
     t.integer "age"
     t.integer "periods_since_pesticide"
     t.integer "user_id"
+    t.integer "harvested",                         default: 0
   end
 
   add_index "crops", ["user_id"], name: "index_crops_on_user_id"
@@ -65,10 +66,11 @@ ActiveRecord::Schema.define(version: 20150316214534) do
   create_table "lifestocks", force: true do |t|
     t.string  "type"
     t.integer "quantity"
-    t.decimal "unit_value",                precision: 5, scale: 0
+    t.integer "unit_value",                limit: 5
     t.integer "age"
     t.integer "periods_since_vaccination"
     t.integer "user_id"
+    t.integer "butchered",                           default: 0
   end
 
   add_index "lifestocks", ["user_id"], name: "index_lifestocks_on_user_id"
