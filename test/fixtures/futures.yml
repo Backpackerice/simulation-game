@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  period: 1
+  game: 
+  settlement_period: 1
+  price: 9.99
+  contractual_item: MyString
+
+two:
+  period: 1
+  game: 
+  settlement_period: 1
+  price: 9.99
+  contractual_item: MyString

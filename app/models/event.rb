@@ -26,4 +26,24 @@ class Event < ActiveRecord::Base
 
   scope :recent, -> { where( period: Game.current_game.period) }
 
+  def self.technical(machine)
+    period = Game.current_game.next_period
+    unless Game.current_game.events.where(period: period, kind: "technical")
+      message = "Deine Geräte sind in einem generell guten Zustand, da du in der letzten Saison deinen #{machine.to_s} repariert hast."
+      create(period: period, game_id: Game.current_game.id, kind: "technical", message: message, action: "Risk.reduce_technical")
+    end
+  end
+
+  def self.disease( model, message)
+    period = Game.current_game.next_period
+    unless Game.current_game.events.where(period: period, kind: "disease")
+      create(period: period, game_id: Game.current_game.id, kind: "disease", message: message, action: "Risk.reduce_disease")
+    end
+  end
+
+  def self.sales(model, message)
+    period = Game.current_game.next_period
+    create(period: period, game_id: Game.current_game.id, kind: "sales", message: message)
+  end
+
 end

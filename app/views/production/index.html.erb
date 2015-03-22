@@ -1,19 +1,19 @@
 <div class="l-content">
-  <h4 style="text-align: center;">Einkauf</h4>
+  <h4 style="text-align: center;">Produktion</h4>
   <div class = "medium-9 columns">
     <div class="medium-12 columns">
-      <h5>Saatgut</h5>
+      <h5>Felder</h5>
 
-      <%= form_tag buy_crops_path do %>
+      <%= form_tag sow_crops_path do %>
         <table width="100%">
           <thead>
             <tr>
               <th width = 60px ></th>
-              <th>Sorte Saatgut</th>
-              <th>vorhandene Menge</th>
-              <th>Marktwert</th>
-              <th>Einkauf</th>
-              <th>Betrag bisher gekauft</th>
+              <th>Sorte</th>
+              <th>Angeplfanzt:</th>
+              <th>Wert</th>
+              <th>Alter (in Saison)</th>
+              <th>Anbauen</th>
             </tr>
           </thead>
           <tbody>
@@ -23,18 +23,18 @@
               <td><b><%= crop.to_s %></b></td>
               <td><%= crop.quantity %></td>
               <td><%= number_to_currency(crop.value, unit: '€') %></td>
-              <td> <%= number_field_tag "#{crop.type}[bought]", 0, step: 100%> </td>
-              <td> <%= number_to_currency( crop.bought * crop.unit_value ) %> </td>
+              <td><%= crop.age %></td>
+              <td> Anbauen <%= number_field_tag "#{crop.type}[sow]", 0, step: 100%></td>
             </tr>
            <% end %>
           </tbody>
         </table>
-      <%= submit_tag "Transaktion Tätigen", class: "button" %>
+      <%= submit_tag "Anbauen", class: "button" %>
       <% end %>
     </div>
 
     <div class="medium-12 columns">
-      <h5>Zuchtvieh</h5>
+      <h5>Vieh</h5>
 
       <%= form_tag buy_lifestock_path do %>
         <table width="100%">
@@ -42,10 +42,10 @@
             <tr>
               <th width = 60px ></th>
               <th>Vieh</th>
-              <th>vorhandene Menge</th>
-              <th>Marktwert</th>
-              <th>Einkauf</th>
-              <th>Betrag bisher gekauft</th>
+              <th>Menge</th>
+              <th>Wert</th>
+              <th>Alter:</th>
+              <th>Nachzüchten</th>
             </tr>
           </thead>
           <tbody>
@@ -55,23 +55,14 @@
               <td><b><%= animal.to_s %></b></td>
               <td><%= animal.quantity %></td>
               <td><%= number_to_currency(animal.value, unit: '€') %></td>
-              <td> <%= number_field_tag "#{animal.type}[bought]", animal.sold, step: 100, max: animal.butchered%></td>
-              <td><%= animal.sold * animal.unit_value %> </td>
+              <td><%= animal.age %></td>
+              <td>Züchten <%= number_field_tag "#{animal.type}[breed]", 0, step: 10 %></td>
             </tr>
           <% end %>
           </tbody>
         </table>
-      <%= submit_tag "Transaktion Tätigen", class: "button" %>
+      <%= submit_tag "Züchten", class: "button" %>
       <% end %>
     </div>
   </div>
-  <div class = "medium-3 columns">
-    <div class= "content-box ">
-      Es ist wichtig rechtzeitig und stetig Saatgut und Zuchtvieh nachzukaufen, damit deine Produktion und Anbau unvermindert weiterläuft und du auch in der nächsten Saison Ware verkaufen kannst.
-    <hr/></div>
-  </div>
 </div>
-
-
-
-

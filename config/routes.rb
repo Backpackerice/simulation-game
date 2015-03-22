@@ -18,6 +18,14 @@ Rails.application.routes.draw do
   post 'vieh' => 'storage#lifestock', as: :lifestock
   post 'technik' => 'storage#machinery', as: :machinery
 
+  post 'getreide-verkaufen' => 'sales#sell_crops', as: :sell_crops
+  post 'vieh-verkaufen' => 'sales#sell_lifestock', as: :sell_lifestock
+
+  post 'getreide-anpflanzen' => 'production#sow_crops', as: :sow_crops
+  post 'vieh-zuechten' => 'production#breed_lifestock', as: :breed_lifestock
+
+  post 'getreide-kaufen' => 'trades#buy_crops', as: :buy_crops
+  post 'vieh-kaufen' => "trades#buy_lifestock", as: :buy_lifestock
   resources :personnels, only: [:index, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.

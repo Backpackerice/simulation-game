@@ -10,5 +10,4 @@ class Lifestock < ActiveRecord::Base
     quantity * unit_value
   end
 
-  scope :vaccinated, ->(type) { where(:type => type, :periods_since_vaccination => 0)}
 end

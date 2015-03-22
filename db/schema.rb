@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319202935) do
+ActiveRecord::Schema.define(version: 20150322210942) do
 
   create_table "assets", force: true do |t|
     t.string   "kind"
@@ -23,14 +23,30 @@ ActiveRecord::Schema.define(version: 20150319202935) do
     t.integer  "game_id"
   end
 
+  create_table "credits", force: true do |t|
+    t.integer  "period"
+    t.integer  "game_id"
+    t.integer  "principal"
+    t.integer  "duration"
+    t.decimal  "interest_rate"
+    t.boolean  "paid"
+    t.integer  "installments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credits", ["game_id"], name: "index_credits_on_game_id"
+
   create_table "crops", force: true do |t|
     t.string  "type"
     t.integer "quantity"
-    t.integer "unit_value",              limit: 5
+    t.integer "unit_value", limit: 5
     t.integer "age"
-    t.integer "periods_since_pesticide"
+    t.integer "sprayed"
     t.integer "user_id"
-    t.integer "harvested",                         default: 0
+    t.integer "harvested",            default: 0
+    t.integer "sold",                 default: 0
+    t.integer "bought",               default: 0
   end
 
   add_index "crops", ["user_id"], name: "index_crops_on_user_id"
@@ -45,6 +61,17 @@ ActiveRecord::Schema.define(version: 20150319202935) do
     t.string   "kind"
   end
 
+  create_table "futures", force: true do |t|
+    t.integer  "period"
+    t.integer  "game_id"
+    t.integer  "settlement_period"
+    t.decimal  "price"
+    t.string   "contractual_item"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quantity",          default: 0
+  end
+
   create_table "games", force: true do |t|
     t.integer "period"
     t.decimal "cash",    precision: 2, scale: 0
@@ -52,6 +79,18 @@ ActiveRecord::Schema.define(version: 20150319202935) do
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id"
+
+  create_table "insurances", force: true do |t|
+    t.integer  "period"
+    t.integer  "game_id"
+    t.string   "item"
+    t.integer  "quantity"
+    t.decimal  "price_per_item"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "insurances", ["game_id"], name: "index_insurances_on_game_id"
 
   create_table "liabilities", force: true do |t|
     t.string   "kind"
@@ -66,11 +105,13 @@ ActiveRecord::Schema.define(version: 20150319202935) do
   create_table "lifestocks", force: true do |t|
     t.string  "type"
     t.integer "quantity"
-    t.integer "unit_value",                limit: 5
+    t.integer "unit_value", limit: 5
     t.integer "age"
-    t.integer "periods_since_vaccination"
+    t.integer "vaccinated"
     t.integer "user_id"
-    t.integer "butchered",                           default: 0
+    t.integer "butchered",            default: 0
+    t.integer "sold",                 default: 0
+    t.integer "bought",               default: 0
   end
 
   add_index "lifestocks", ["user_id"], name: "index_lifestocks_on_user_id"
@@ -81,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150319202935) do
     t.integer "age"
     t.integer "periods_since_maintenance"
     t.integer "user_id"
+    t.integer "sold",                                              default: 0
   end
 
   add_index "machineries", ["user_id"], name: "index_machineries_on_user_id"

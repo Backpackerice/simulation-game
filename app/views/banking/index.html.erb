@@ -1,0 +1,134 @@
+<div class="l-content banking">
+  <h4 style="text-align: center;">Bank</h4>
+  <div class = "medium-9 columns">
+    <div class="medium-4 columns">
+      <h5>Liste Ihrer Kredite</h5>
+      <% if !@credits.empty? %>
+        <% @credits.each do |credit| %>
+          <table>
+            <thead>
+              <th>Kreditsumme</th>
+              <th>verbleibende Laufzeit</th>
+              <th>Zinsen</th>
+              <th>Tilgung</th>
+            </thead>
+            <tbody>
+              <% form_tag amortization_path do %>
+                <%= hidden_field_tag "credit[id]", machine.id %>
+                <tr>
+                  <td> <%= number_to_currency(credit.principal, unit: '€') %> </td>
+                  <td> credit.duration</td>
+                  <td> credit.auccumulated_interest</td>
+                  <td> <%= submit_tag "Jetzt Tilgen", class: "button small"%>
+                     <%= check_box_tag "credit[amortize]", 'tilgen' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% else %>
+        <div class= "content-box info" >
+          Sie haben momentan keine Kredite aufgenommen
+        </div>
+      <% end %>
+      </div>
+
+      <div class="medium-4 columns">
+
+        <h5>Liste Ihrer Futures (Termingeschäft)</h5>
+
+      <% if !@futures.empty? %>
+        <% @futures.each do |future| %>
+          <table>
+            <thead>
+              <th>Vereinbarter Preis</th>
+              <th>Menge</th>
+              <th>Gesamt</th>
+              <th>Termin</th>
+              <th>Vertragsgegenstand</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td> <%= future.price %></td>
+                <td> <%= future.quantity %> </td>
+                <td> <%= number_to_currency((future.price * future.quantity), unit: '€') %> </td>
+                <td> <%= future.settlement_period %></td>
+                <td> <%= future.contractual_item%></td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
+      <% else %>
+        <div class= "content-box info" >
+          Sie haben momentan keine Futures
+        </div>
+      <% end %>
+      </div>
+      <div class="medium-4 columns">
+
+        <h5>Liste Ihrer Versicherungen</h5>
+
+        <% if !@insurances.empty? %>
+          <% @insurances.each do |insurance| %>
+            <table>
+              <thead>
+                <th>Versicherungskosten pro Gegenstand</th>
+                <th>Versicherter Gegenstand</th>
+                <th>Menge</th>
+                <th> Gesamtkosten </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> <%= number_to_currency(insurance.price, unit: '€') %> </td>
+                  <td> <%= insurance.item %> </td>
+                  <td> <%= insurance.quantity %> </td>
+                  <td> <%= number_to_currency((insurance.price * insurance.quantity), unit: '€') %> </td>
+                </tr>
+              </tbody>
+              <% end %>
+            </table>
+      <% else %>
+        <div class= "content-box info" >
+          Sie haben momentan keine Versicherungen
+        </div>
+      <% end %>
+      </div>
+
+    <div class="medium-12 columns">
+      <h5>Vieh</h5>
+
+        <table width="100%">
+          <thead>
+            <tr>
+              <th width = 60px ></th>
+              <th>Vieh</th>
+              <th>Menge</th>
+              <th>Wert</th>
+              <th>Alter:</th>
+              <th>Melken / Schlachten</th>
+              <th>Impfen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class = "medium-3 columns">
+    <div class= "content-box ">
+      Bei der Bank kannst du nicht nur Kapital leihen um Invesititionen zu finanzieren, sondern dich auch gegen allerlei Risiken absicher. Mit Futures kannst du deine Produkte zum aktuellen Marktpreis an einem bestimmten Termin in der Zukunft verkaufen und dich somit vor Preisschwankungen schützen. Mit Versicherung kannst du dich gegen Ernteausfälle und Schäden an deinen Produktionsmitteln absichern.
+    <hr/></div>
+  </div>
+</div>
+

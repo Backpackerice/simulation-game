@@ -1,105 +1,85 @@
 <div class="l-content">
-  <h4 style="text-align: center;">Verwaltung</h4>
+  <h4 style="text-align: center;">Vertrieb</h4>
   <div class = "medium-9 columns">
     <div class="medium-12 columns">
-      <h5>Felder</h5>
+      <h5>Getreide</h5>
 
-      <table width="100%">
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Sorte</th>
-            <th>Angeplfanzt:</th>
-            <th>Wert</th>
-            <th>Alter (in Saison)</th>
-            <th>Abbauen</th>
-            <th>Pestizide</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @crops.each do |crop| %>
-          <tr>
-            <td><div class="<%= crop.type.downcase  %>-icon"></div></td>
-            <td><b><%= crop.type.to_s %></b></td>
-            <td><%= crop.quantity %></td>
-            <td><%= number_to_currency(crop.value, unit: '€') %></td>
-            <td>Saison <%=  Game.data.period - crop.age %></td>
-            <td><%= link_to('Abbauen', harvest_path) %></td>
-            <td><%= link_to('Spritzen', spray_path) %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= form_tag sell_crops_path do %>
+        <table width="100%">
+          <thead>
+            <tr>
+              <th width = 60px ></th>
+              <th>Sorte</th>
+              <th>Menge gesamt</th>
+              <th>Geerntet:</th>
+              <th>Wert</th>
+              <th>Alter (in Saison)</th>
+              <th>Verkaufen</th>
+              <th>Bisher Verkauft</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @crops.each do |crop| %>
+            <tr>
+              <td><div class="<%= crop.type.downcase  %>-icon"></div></td>
+              <td><b><%= crop.to_s %></b></td>
+              <td><%= crop.quantity %></td>
+              <td><%= crop.harvested %></td>
+              <td><%= number_to_currency(crop.value, unit: '€') %></td>
+              <td><%= crop.age %></td>
+              <td> Verkaufen <%= number_field_tag "#{crop.type}[sold]", 0, step: 100, max: crop.harvested%></td>
+              <td><%= crop.sold * crop.unit_value %> </td>
+            </tr>
+           <% end %>
+          </tbody>
+        </table>
+      <%= submit_tag "Transaktion Tätigen", class: "button" %>
+      <% end %>
     </div>
 
     <div class="medium-12 columns">
       <h5>Vieh</h5>
 
-      <table width="100%">
-        <thead>
-          <tr>
-            <th>Status</th>
-            <th>Vieh</th>
-            <th>Menge</th>
-            <th>Wert</th>
-            <th>Alter:</th>
-            <th>Melken / Schlachten</th>
-            <th>Impfen</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @lifestock.each do |animal| %>
-          <tr>
-            <td><div class="<%= animal.type.downcase  %>-icon"></div></td>
-            <td><b><%= animal.type.to_s %></b></td>
-            <td><%= animal.quantity %></td>
-            <td><%= number_to_currency(animal.value, unit: '€') %></td>
-            <td><%= animal.age %></td>
-            <td><% if animal.type == "Kuh" %>
-                    <%= link_to('Melken', milk_path) %>
-                <% else %>
-                  <%= link_to('Schlachten', butcher_path) %>
-                <% end %>
-            </td>
-            <td><%= link_to('Impfen', vaccinate_path) %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="medium-12 columns">
-      <h5>Technik</h5>
-
-      <table width="100%">
-        <thead>
-          <tr>
-            <th width="50">Status</th>
-            <th>Gerät</th>
-            <th>Wert</th>
-            <th>Alter (in Saison)</th>
-            <th>Wartung</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @machinery.each do |machine| %>
-          <tr>
-            <td><div class="<%= machine.type.downcase  %>-icon"></div></td>
-            <td><b><%= machine.type.to_s %></b></td>
-            <td><%= number_to_currency(machine.value, unit: '€') %></td>
-            <td><%= machine.age %></td>
-            <td> <%= link_to('Reparieren', maintenance_path) %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+      <%= form_tag sell_lifestock_path do %>
+        <table width="100%">
+          <thead>
+            <tr>
+              <th width = 60px ></th>
+              <th>Vieh</th>
+              <th>Menge gesamt</th>
+              <th>Geschlachtet</th>
+              <th>Wert</th>
+              <th>Alter:</th>
+              <th>Verkaufen</th>
+              <th>Bisher Verkauft</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @lifestock.each do |animal| %>
+            <tr>
+              <td><div class="<%= animal.type.downcase  %>-icon"></div></td>
+              <td><b><%= animal.to_s %></b></td>
+              <td><%= animal.quantity %></td>
+              <td><%= animal.butchered %></td>
+              <td><%= number_to_currency(animal.value, unit: '€') %></td>
+              <td><%= animal.age %></td>
+              <td>Verkaufen <%= number_field_tag "#{animal.type}[sold]", animal.sold, step: 100, max: animal.butchered%></td>
+              <td><%= animal.sold * animal.unit_value %> </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <%= submit_tag "Transaktion Tätigen", class: "button" %>
+      <% end %>
     </div>
   </div>
   <div class = "medium-3 columns">
     <div class= "content-box ">
-      Hi from the index Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+      Hinweis nur vorher geerntetes Getreide bzw. geschlachtetes Vieh verkauft werden kann, verkauft wird immmer entweder zum Marktpreis oder zum Preis eventuell gekaufter Futures.
     <hr/></div>
   </div>
 </div>
+
+
 
 

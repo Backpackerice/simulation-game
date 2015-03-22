@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  period: 1
+  game_id: 
+  principal: 1
+  duration: 1
+  interest_rate: 9.99
+  paid: false
+  installments: 1
+
+two:
+  period: 1
+  game_id: 
+  principal: 1
+  duration: 1
+  interest_rate: 9.99
+  paid: false
+  installments: 1

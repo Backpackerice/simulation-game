@@ -1,5 +1,6 @@
 class Harvester < Machinery
-  def name
+  def to_s
     "Mähdrescher"
   end
+
 end
