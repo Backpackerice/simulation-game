@@ -26,6 +26,12 @@ Rails.application.routes.draw do
 
   post 'getreide-kaufen' => 'trades#buy_crops', as: :buy_crops
   post 'vieh-kaufen' => "trades#buy_lifestock", as: :buy_lifestock
+
+  post 'tilgen' => 'banking#amortize', as: :amortization
+  post 'future' => 'banking#future', as: :futures
+  post 'kredit' => 'banking#credit', as: :credits
+  post 'versicherung' => 'banking#insurance', as: :insurance
+
   resources :personnels, only: [:index, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.

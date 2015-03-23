@@ -17,4 +17,11 @@ class SimulationController < ApplicationController
     #adjust price to crops and meat based on current market price
     #if there was a future for today that becomes the new price
   end
+
+  def simulate_financials
+    # zinsen
+    # preise
+  end
+
+  #change global price object
 end

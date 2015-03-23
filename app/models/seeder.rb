@@ -1,18 +1,18 @@
 module Seeder
   USER_ATTR_LIST = {
     :crops => [
-                {type: "Wheat", quantity: 2000, unit_value: 1.2, age: 2, sprayed: 0},
-                {type: "Corn", quantity: 3000, unit_value: 1.5, age: 2, sprayed: 0},
-                {type: "Oat", quantity: 4000, unit_value: 1.7, age: 3, sprayed: 0}
+                {type: "Wheat", quantity: 2000, age: 2, sprayed: 0},
+                {type: "Corn", quantity: 3000,  age: 2, sprayed: 0},
+                {type: "Oat", quantity: 4000, age: 3, sprayed: 0}
               ],
     :machineries => [
-                {type: "Tractor", unit_value: 20000.0, age: 2, periods_since_maintenance: 2},
-                {type: "Harvester", unit_value: 15000.0, age: 2, periods_since_maintenance: 1}
+                {type: "Tractor", age: 2, periods_since_maintenance: 2},
+                {type: "Harvester", age: 2, periods_since_maintenance: 1}
                 ],
     :lifestocks => [
-                {type: "Cow", quantity: 150, unit_value: 750.0, age: 2, vaccinated: 0},
-                {type: "Cattle", quantity: 50, unit_value: 500.0, age: 2, vaccinated: 0},
-                {type: "Pig", quantity: 200, unit_value: 450.0, age: 3, vaccinated: 0}
+                {type: "Cow", quantity: 150, age: 2, vaccinated: 0},
+                {type: "Cattle", quantity: 50, age: 2, vaccinated: 0},
+                {type: "Pig", quantity: 200, age: 3, vaccinated: 0}
               ],
 }
 
@@ -31,6 +31,7 @@ module Seeder
       end
 
     end
+
     binding.pry
     liability = Game.current_game.liabilities.create(kind: "personnel", period: 1, description: "Kummulativen Auslagen für das Gehalt des Personals", amount: 0)
     PERSONELL_ATTRIBUTES_LIST.each do |params|
@@ -40,5 +41,10 @@ module Seeder
       personnel.save!
     end
     liability.save!
+
+    {"Wheat" => 1.5 , "Corn" => 1.2 , "Oat" => 1.1 , "Tractor" => 15000, "Harvester" => 20000, "Cow" => 750.0, "Cattle" => 500.0, "Pig" => 450.0}.each do |key, val|
+      Price.create(item_type: key, game_id: Game.current_game.id, price: val)
+    end
   end
+
 end

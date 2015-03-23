@@ -1,0 +1,77 @@
+<div class="medium-12 columns">
+    <h5>Kredit Aufnehmen</h5>
+      <h2> Aktueller Leitzins #{number_to_percentage(Game.current_game.interest)}</h2>
+        <% form_tag credits_path do%>
+          <table width="100%">
+            <thead>
+              <tr>
+                <th>Kreditsume</th>
+                <th>Laufzeit</th>
+                <th>Raten</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= number_field_tag "credit[principal]", 0, step: 100%></td>
+                <td><%= number_field_tag "credit[duration]", 0%></td>
+                <td><%= number_field_tag "credit[installments]", 0%></td>
+              </tr>
+            </tbody>
+          </table>
+          <%= submit_tag "Kredit Aufnehmen", class: "button" %>
+        <%end%>
+    </div>
+    <div class="medium-12 columns">
+      <h5>Future Kaufen</h5>
+        <div class = "futures" data-dependencies="{<% @market_price.each do |key, val|
+             key %>:<%= val %>,<%end%>}">
+          <% form_tag futures_path do%>
+            <table width="100%">
+            <thead>
+              <tr>
+                <th> Vertragsgegenstand </th>
+                <th> Preis pro Einheit </th>
+                <th> Termin </th>
+                <th> Menge </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= number_field_tag "credit[principal]", 0, step: 100%></td>
+                <td><%= number_field_tag "credit[duration]", 0%></td>
+                <td><%= number_field_tag "credit[installments]", 0%></td>
+              </tr>
+            </tbody>
+          </table>
+          <%= submit_tag "Kredit Aufnehmen", class: "button" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="medium-12 columns">
+      <h5>Versicherung Kaufen</h5>
+        <% form_tag insurance_path do %>
+          <table width="100%">
+            <thead>
+              <tr>
+                <th>Vieh</th>
+                <th>Menge</th>
+                <th>Wert</th>
+                <th>Alter:</th>
+                <th>Melken / Schlachten</th>
+                <th>Impfen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        <%end%>
+    </div>

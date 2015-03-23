@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322210942) do
+ActiveRecord::Schema.define(version: 20150323071841) do
 
   create_table "assets", force: true do |t|
     t.string   "kind"
@@ -40,13 +40,12 @@ ActiveRecord::Schema.define(version: 20150322210942) do
   create_table "crops", force: true do |t|
     t.string  "type"
     t.integer "quantity"
-    t.integer "unit_value", limit: 5
     t.integer "age"
     t.integer "sprayed"
     t.integer "user_id"
-    t.integer "harvested",            default: 0
-    t.integer "sold",                 default: 0
-    t.integer "bought",               default: 0
+    t.integer "harvested", default: 0
+    t.integer "sold",      default: 0
+    t.integer "bought",    default: 0
   end
 
   add_index "crops", ["user_id"], name: "index_crops_on_user_id"
@@ -74,8 +73,9 @@ ActiveRecord::Schema.define(version: 20150322210942) do
 
   create_table "games", force: true do |t|
     t.integer "period"
-    t.decimal "cash",    precision: 2, scale: 0
+    t.decimal "cash",     precision: 2, scale: 0
     t.integer "user_id"
+    t.decimal "interest",                         default: 0.04
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id"
@@ -105,24 +105,22 @@ ActiveRecord::Schema.define(version: 20150322210942) do
   create_table "lifestocks", force: true do |t|
     t.string  "type"
     t.integer "quantity"
-    t.integer "unit_value", limit: 5
     t.integer "age"
     t.integer "vaccinated"
     t.integer "user_id"
-    t.integer "butchered",            default: 0
-    t.integer "sold",                 default: 0
-    t.integer "bought",               default: 0
+    t.integer "butchered",  default: 0
+    t.integer "sold",       default: 0
+    t.integer "bought",     default: 0
   end
 
   add_index "lifestocks", ["user_id"], name: "index_lifestocks_on_user_id"
 
   create_table "machineries", force: true do |t|
     t.string  "type"
-    t.decimal "unit_value",                precision: 5, scale: 0
     t.integer "age"
     t.integer "periods_since_maintenance"
     t.integer "user_id"
-    t.integer "sold",                                              default: 0
+    t.integer "sold",                      default: 0
   end
 
   add_index "machineries", ["user_id"], name: "index_machineries_on_user_id"
@@ -136,6 +134,14 @@ ActiveRecord::Schema.define(version: 20150322210942) do
     t.datetime "updated_at"
     t.integer  "game_id"
     t.integer  "liability_id"
+  end
+
+  create_table "prices", force: true do |t|
+    t.string   "item_type"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "game_id"
   end
 
   create_table "users", force: true do |t|

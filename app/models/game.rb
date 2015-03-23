@@ -8,6 +8,7 @@ class Game < ActiveRecord::Base
   has_many :futures
   has_many :insurances
   has_many :credits
+  has_many :prices
   cattr_accessor :current_game
 
   def next_period

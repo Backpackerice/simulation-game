@@ -5,6 +5,10 @@ class Crops < ActiveRecord::Base
   @@croplist = ["Wheat", "Corn", "Oat"]
   validates_inclusion_of :type, in: croplist
 
+  def unit_value
+    Price.where(type: self.type)
+  end
+
   def value
     quantity * unit_value
   end

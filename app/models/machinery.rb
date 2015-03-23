@@ -8,5 +8,8 @@ class Machinery < ActiveRecord::Base
   alias_attribute :value, :unit_value
   scope :repaired, ->(type) { where(:type => type, :periods_since_maintenance => 0)}
 
+  def unit_value
+    Price.where(type: self.type)
+  end
 
 end
