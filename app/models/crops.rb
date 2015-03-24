@@ -13,4 +13,11 @@ class Crops < ActiveRecord::Base
     quantity * unit_value
   end
 
+  def storm_stricken
+    destroyed = self.quantity * rand(0.1)
+    quantity = self.quantity - destroyed
+    save!
+    destroyed
+  end
+
 end

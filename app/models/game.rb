@@ -18,7 +18,6 @@ class Game < ActiveRecord::Base
   def set_current_interest_rate
     response = Net::HTTP.get_response(URI.parse("https://sdw-wsrest.ecb.europa.eu/service/data/MIR/M.U2.B.A2I.AM.R.A.2240.EUR.N?lastNObservations=1"))
     interest_rate = Nokogiri::XML(response.body).xpath("//generic:Obs/generic:ObsValue")[0].attributes["value"].value.to_f
-    binding.pry
     self.interest = interest_rate
     save!
   end

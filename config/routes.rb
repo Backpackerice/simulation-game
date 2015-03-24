@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'dashboard#index'
+  root 'management#index'
 
   get 'dashboard' => 'dashboard#index', as: :dashboard
 
@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   # management routes
   get 'management' => 'management#index', as: :management
+
+  get 'simulation' => 'simulation#simulate', as: :simulation
 
   post 'getreide' => 'storage#crops', as: :crops
   post 'vieh' => 'storage#lifestock', as: :lifestock

@@ -12,4 +12,8 @@ class Machinery < ActiveRecord::Base
     Price.where(item_type: self.type)[0].price.to_i
   end
 
+  def needs_repair?
+    (periods_since_maintenance * rand(10)) > 15
+  end
+
 end

@@ -12,7 +12,7 @@
 				<tbody>
 	      <% @current_events.each do |event| %>
 					<tr>
-						<td class = "centered"><div class="<%= event.type.downcase  %>-icon"></div> <%= Event.types_mapping.fetch(event.type)%></td>
+						<td class = "centered"><div class="<%= event.kind.downcase  %>-icon"></div> <%= Event.types_mapping.fetch(event.kind)%></td>
 						<td><%= event.message %></td>
 					</tr>
 	       <% end %>
@@ -141,7 +141,11 @@
 				Hier siehst du deinen Übersichtsbildschirm deines Unternehmens. Neben den letzten aktuellen Nachrichten erhälst du zusätzlich einen kurzen Finanzbericht für das letzte Jahr und einen Überblick über wichtige Kennzahlen des Unternehmens. Unter anderem siehst du hier den Liquidationswert des Unternehmens. Die Finanz-, Produktions- und Verkaufsberichte des letzten Jahres sind ebenfalls auf dieser Seite verlinkt.
 			<hr/></div>
 		</div>
+		<div class = "medium-3 large-3 columns">
+			<%= link_to "Simulieren", simulation_path, class: "button primary wide"%>
+		</div>
 	</div>
+
 </div>
 
 

@@ -3,19 +3,19 @@ class Event < ActiveRecord::Base
   belongs_to :game
   cattr_reader :types, :types_mapping, :initial_events
 
-  @@types = ["finance", "price", "sales", "storm", "disease"]
-  @@types_mapping = {"finance" => "Finanzereignis", "price" => "Preisbewegung", "sales" => "Verkauf", "storm" => "Wetter", "disease" => "Krankheit", "technical" => "Technik"}
+  @@types = ["financial", "price", "sales", "storm", "disease"]
+  @@types_mapping = {"financial" => "Finanzereignis", "price" => "Preisbewegung", "sales" => "Verkauf", "storm" => "Wetter", "disease" => "Krankheit", "technical" => "Technik"}
 
   class InitialEvent
-    attr_accessor :type, :message
-    def initialize(type, message)
-      @type = type
+    attr_accessor :kind, :message
+    def initialize(kind, message)
+      @kind = kind
       @message = message
     end
   end
 
   @@initial_events = {
-   "finance" => "Wie hoch deine Zinsen sind, wie viel deine Futures wert sind, und wie viel dich deine Versicherung gekostet hat erfährst du hier. ",
+   "financial" => "Wie hoch deine Zinsen sind, wie viel deine Futures wert sind, und wie viel dich deine Versicherung gekostet hat erfährst du hier. ",
    "price" => "Was ist los auf den Weltmärkten, wie haben sich eventuelle Preisschwankung auf den Wert deines Lagerbestands ausgewirkt",
    "sales" => "Wie viel hast du auf den Auktionen verkaufen und zu welchen Preisen, dies hängt vor allem von der Qualität deinses Personals ab",
    "storm" => "Haben die Wetterbedingungen deine Ernte dezimiert oder ein Sturm diese sogar komplett vernichtet?",

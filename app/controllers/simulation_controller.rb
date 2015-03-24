@@ -1,10 +1,19 @@
 class SimulationController < ApplicationController
 
+  def simulate
+    update_game_data
+    remove_sold_resources
+    update_credit
+    adjust_market_price
+    simulate_technical
+    simulate_disease
+    simulate_weather
+    redirect_to root_path
+  end
+
   def update_game_data
-    #increase period
-    # update interestrate
-    Game.current_game.period += 1
-    Game.current_game.period.set_current_interest_rate
+    game.period += 1
+    game.set_current_interest_rate
   end
 
   def remove_sold_resources
@@ -46,25 +55,38 @@ class SimulationController < ApplicationController
   end
 
   def adjust_market_price
-    #adjust price to crops and meat based on current market price
-    #if there was a future for today that becomes the new price
-  end
-
-  def simulate_financials
-
-    # preise
+    game.prices.each do |price|
+      price.random_change(0.1)
+    end
+    Event.financial(nil, "Es hat signifikante Preisschwankungen am Markt gegeben gegeben. Insbesondere ist Getreide davon betroffen.")
   end
 
   def simulate_technical
-
+    machines = current_user.machineries.select do |machine| machine.needs_repair? end
+    unless machines.empty?
+      place = machines.map(&:to_s).join(", ")
+      Event.financial(nil, "Leider müssen die folgenden Maschinen repariert werden #{place}")
+    end
   end
 
   def simulate_disease
-
+    animals = current_user.lifestocks.reduce(0) do |sum, animal|
+      sum += animal.number_sick?
+      sum
+    end
+    number = animals.to_i
+    Event.financial(nil, "Leider sind #{number} deiner Tiere verstorben.")
   end
 
   def simulate_weather
-
+    if rand(10) < 3
+      crops = current_user.crops.reduce(0) do |sum, crop|
+        sum += crop.storm_stricken
+        sum
+      end
+      number = crops.to_i
+      Event.financial(nil, "Leider sind #{number} deiner Tiere verstorben.")
+    end
   end
 
   def game
