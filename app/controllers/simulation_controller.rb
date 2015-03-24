@@ -24,9 +24,25 @@ class SimulationController < ApplicationController
   end
 
   def update_credit
+    interest_due = game.credits.inject(0) do |sum, credit|
+      credit.duration = credit.duration -1
+      if credit.duration == 0
+        credit.destroy!
+      else
+        credit.save!
+      end
+      sum += credit.accumulated_interest
+      sum
+    end
 
-    # pay credit period / installments
-    # reduce duration
+    repayment = game.credits.inject(0) do |sum, credit|
+      repay = (credit.principal / installments)
+      sum += repay
+      sum
+    end
+    game.cash = game.cash - interest_due
+    game.save!
+    Event.financial(nil, "Sie mussten in dieser Saison Zinsen über #{interest_due} Euro und eine Rueckzahlung von #{repayment} bezahlen.")
   end
 
   def adjust_market_price
@@ -35,7 +51,7 @@ class SimulationController < ApplicationController
   end
 
   def simulate_financials
-    # zinsen
+
     # preise
   end
 
