@@ -33,7 +33,7 @@ class SimulationController < ApplicationController
   end
 
   def update_credit
-    interest_due = game.credits.inject(0) do |sum, credit|
+    interest_due = game.credits.reduce(0) do |sum, credit|
       credit.duration = credit.duration -1
       if credit.duration == 0
         credit.destroy!
