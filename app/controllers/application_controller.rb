@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
   ensure
     Game.current_game = nil
   end
+
+  private
+
   #around filter
   # around_action :wrap_application
   #

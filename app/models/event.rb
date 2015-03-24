@@ -46,4 +46,9 @@ class Event < ActiveRecord::Base
     create(period: period, game_id: Game.current_game.id, kind: "sales", message: message)
   end
 
+  def self.financial(model, message)
+    period = Game.current_game.next_period
+    create(period: period, game_id: Game.current_game.id, kind: "financial", message: message)
+  end
+
 end

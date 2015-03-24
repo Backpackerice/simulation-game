@@ -1,7 +1,10 @@
 class SimulationController < ApplicationController
 
-  def increase_period
-
+  def update_game_data
+    #increase period
+    # update interestrate
+    Game.current_game.period += 1
+    Game.current_game.period.set_current_interest_rate
   end
 
   def remove_sold_resources

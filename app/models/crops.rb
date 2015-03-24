@@ -6,7 +6,7 @@ class Crops < ActiveRecord::Base
   validates_inclusion_of :type, in: croplist
 
   def unit_value
-    Price.where(type: self.type)
+    Price.where(item_type: self.type)[0].price.to_i
   end
 
   def value

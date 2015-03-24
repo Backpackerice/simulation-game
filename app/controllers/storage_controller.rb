@@ -65,9 +65,13 @@ class StorageController < ApplicationController
     params.require(type).permit(:repair, :id)
   end
 
+  def game
+    Game.current_game
+  end
+
   def subtract_cash(amount)
     cash = Game.current_game.cash
-    Game.current_game.cash = cash - 1000
+    Game.current_game.cash = cash - amount
     Game.current_game.save!
   end
 

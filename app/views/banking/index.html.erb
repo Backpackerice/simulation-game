@@ -1,6 +1,6 @@
 <div class="l-content banking">
   <h4 style="text-align: center;">Bank</h4>
-  <div class = "medium-9 columns">
+  <div class = "medium-12 columns">
     <div class="medium-4 columns">
       <h5>Liste Ihrer Kredite</h5>
       <% if !@credits.empty? %>
@@ -13,15 +13,13 @@
               <th>Tilgung</th>
             </thead>
             <tbody>
-              <% form_tag amortization_path do %>
-                <%= hidden_field_tag "credit[id]", machine.id %>
+              <%= form_tag amortization_path do %>
+                <%= hidden_field_tag "credit[id]", credit.id %>
                 <tr>
                   <td> <%= number_to_currency(credit.principal, unit: '€') %> </td>
-                  <td> credit.duration</td>
-                  <td> credit.auccumulated_interest</td>
-                  <td> <%= submit_tag "Jetzt Tilgen", class: "button small"%>
-                     <%= check_box_tag "credit[amortize]", 'tilgen' %>
-                  </td>
+                  <td> <%= credit.duration %> </td>
+                  <td> <%= credit.accumulated_interest %> </td>
+                  <td> <%= submit_tag "Jetzt Tilgen", class: "button small"%> </td>
                 </tr>
               <% end %>
             </tbody>
@@ -80,10 +78,10 @@
               </thead>
               <tbody>
                 <tr>
-                  <td> <%= number_to_currency(insurance.price, unit: '€') %> </td>
+                  <td> <%= number_to_currency(insurance.price_per_item, unit: '€') %> </td>
                   <td> <%= insurance.item %> </td>
                   <td> <%= insurance.quantity %> </td>
-                  <td> <%= number_to_currency((insurance.price * insurance.quantity), unit: '€') %> </td>
+                  <td> <%= number_to_currency((insurance.price_per_item * insurance.quantity), unit: '€') %> </td>
                 </tr>
               </tbody>
             </table>
@@ -94,95 +92,17 @@
         </div>
       <% end %>
       </div>
-
-    <% render 'form'%>
-    <div class="medium-12 columns">
-      <h5>Kredit Aufnehmen</h5>
-
-        <table width="100%">
-          <thead>
-            <tr>
-              <th>Vieh</th>
-              <th>Menge</th>
-              <th>Wert</th>
-              <th>Alter:</th>
-              <th>Melken / Schlachten</th>
-              <th>Impfen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-        <div class="medium-12 columns">
-      <h5>Future Kaufen</h5>
-
-        <table width="100%">
-          <thead>
-            <tr>
-              <th>Vieh</th>
-              <th>Menge</th>
-              <th>Wert</th>
-              <th>Alter:</th>
-              <th>Melken / Schlachten</th>
-              <th>Impfen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-        <div class="medium-12 columns">
-      <h5>Versicherung Kaufen</h5>
-
-        <table width="100%">
-          <thead>
-            <tr>
-              <th>Vieh</th>
-              <th>Menge</th>
-              <th>Wert</th>
-              <th>Alter:</th>
-              <th>Melken / Schlachten</th>
-              <th>Impfen</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
     </div>
 
+  <div class = "medium-12 columns">
+    <%= render 'form'%>
+
+
+    <div class = "medium-3 columns">
+      <div class= "content-box bank-content">
+        Bei der Bank kannst du nicht nur Kapital leihen um Invesititionen zu finanzieren, sondern dich auch gegen allerlei Risiken absicher. Mit Futures kannst du deine Produkte zum aktuellen Marktpreis an einem bestimmten Termin in der Zukunft verkaufen und dich somit vor Preisschwankungen schützen. Mit Versicherung kannst du dich gegen Ernteausfälle und Schäden an deinen Produktionsmitteln absichern.
+      <hr/></div>
+    </div>
   </div>
-  <div class = "medium-3 columns">
-    <div class= "content-box ">
-      Bei der Bank kannst du nicht nur Kapital leihen um Invesititionen zu finanzieren, sondern dich auch gegen allerlei Risiken absicher. Mit Futures kannst du deine Produkte zum aktuellen Marktpreis an einem bestimmten Termin in der Zukunft verkaufen und dich somit vor Preisschwankungen schützen. Mit Versicherung kannst du dich gegen Ernteausfälle und Schäden an deinen Produktionsmitteln absichern.
-    <hr/></div>
-  </div>
+
 </div>
-

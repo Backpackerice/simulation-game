@@ -25,11 +25,6 @@
             <% end %>
           </li>
           <li>
-            <% if current_user %>
-              <%= link_to "Berichte", reports_path %>
-            <% end %>
-          </li>
-          <li>
             <% if user_signed_in? %>
               <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
             <% end %>

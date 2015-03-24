@@ -27,6 +27,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'devise'
+
+gem 'nokogiri'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'foundation-rails'
@@ -39,7 +42,11 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
 
+end
 
+group :production do
+  gem 'pg',             '0.17.1'
+  gem 'rails_12factor', '0.0.2'
 end
 # Use unicorn as the app server
 # gem 'unicorn'

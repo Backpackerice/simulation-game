@@ -9,7 +9,7 @@ class Machinery < ActiveRecord::Base
   scope :repaired, ->(type) { where(:type => type, :periods_since_maintenance => 0)}
 
   def unit_value
-    Price.where(type: self.type)
+    Price.where(item_type: self.type)[0].price.to_i
   end
 
 end

@@ -1,7 +1,8 @@
-<div class="medium-12 columns">
-    <h5>Kredit Aufnehmen</h5>
-      <h2> Aktueller Leitzins #{number_to_percentage(Game.current_game.interest)}</h2>
-        <% form_tag credits_path do%>
+<div class="medium-9 columns">
+    <h3>Kredit Aufnehmen</h3>
+      <h4> Aktuelle Kreditkosten <%= number_to_percentage(Game.current_game.interest) %> </h2>
+        <p>- Quelle <%= link_to "EZB cost of borrowing", "https://sdw.ecb.europa.eu/quickview.do?SERIES_KEY=124.MIR.M.U2.B.A2I.AM.R.A.2240.EUR.N"%></p>
+          <%= form_tag credits_path do %>
           <table width="100%">
             <thead>
               <tr>
@@ -18,60 +19,56 @@
               </tr>
             </tbody>
           </table>
-          <%= submit_tag "Kredit Aufnehmen", class: "button" %>
+        <%= submit_tag "Termingeschäft Vereinbaren", class: "button" %>
         <%end%>
     </div>
-    <div class="medium-12 columns">
-      <h5>Future Kaufen</h5>
-        <div class = "futures" data-dependencies="{<% @market_price.each do |key, val|
-             key %>:<%= val %>,<%end%>}">
-          <% form_tag futures_path do%>
+    <div class="medium-9 columns">
+      <h3>Future Kaufen</h3>
+        <%= tag("div", :data => {:dependencies => @market_price }, class: "futures") %>
+          <%= form_tag futures_path do%>
             <table width="100%">
             <thead>
               <tr>
                 <th> Vertragsgegenstand </th>
                 <th> Preis pro Einheit </th>
-                <th> Termin </th>
+                <th> Termin: in wie vielen Saisonen </th>
                 <th> Menge </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><%= number_field_tag "credit[principal]", 0, step: 100%></td>
-                <td><%= number_field_tag "credit[duration]", 0%></td>
-                <td><%= number_field_tag "credit[installments]", 0%></td>
+                <td><%= select_tag "future[contractual_item]", options_for_select(@market_price.keys, "Crops"), data: {contract: true} %></td>
+                <td><%= number_field_tag "future[price]", 0, data: {price: true}%></td>
+                <td><%= number_field_tag "future[settlement_period]", 0%></td>
+                <td><%= number_field_tag "future[quantity]", 0, steps: 100%></td>
               </tr>
             </tbody>
           </table>
-          <%= submit_tag "Kredit Aufnehmen", class: "button" %>
+          <%= submit_tag "Versicherung Kaufen", class: "button" %>
         <% end %>
       </div>
-    </div>
-    <div class="medium-12 columns">
-      <h5>Versicherung Kaufen</h5>
-        <% form_tag insurance_path do %>
-          <table width="100%">
+    <div class="medium-9 columns">
+      <h3>Versicherungen Kaufen</h3>
+      <%= tag("div", :data => {:dependencies => @insurance_price }, class: "insurance") %> </div>
+          <%= form_tag insurance_path do%>
+            <table width="100%">
             <thead>
               <tr>
-                <th>Vieh</th>
-                <th>Menge</th>
-                <th>Wert</th>
-                <th>Alter:</th>
-                <th>Melken / Schlachten</th>
-                <th>Impfen</th>
+                <th> Vertragsgegenstand </th>
+                <th> Preis pro Einheit </th>
+                <th> Menge </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><%= select_tag "insurance[item]", options_for_select(@insurance_price.keys, "Crops"), data: {item: true} %></td>
+                <td><%= number_field_tag "insurance[price_per_item]", 0, data: {itemprice: true} %></td>
+                <td><%= number_field_tag "insurance[quantity]", 0, step: 100%></td>
               </tr>
             </tbody>
           </table>
-        <%end%>
+          <%= submit_tag "Transaktion Tätigen", class: "button" %>
+        <% end %>
+      </div>
+
     </div>

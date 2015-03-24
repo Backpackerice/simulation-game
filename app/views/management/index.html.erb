@@ -18,79 +18,65 @@
 	       <% end %>
 				</tbody>
 			</table>
+
 			<div class = "medium-6 large-6 columns ">
 				<div class = "report">
 					<h3> Finanzbericht </h3>
 					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Ausgangslage
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Ausgangslage</strong> (Summe der Aktiva)
 						</div>
-						<div class= "medium-6 large-6 columns">
-							Betrag zum Anfang des Spiels
-						</div>
-					</div>
-					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Zinsen
-						</div>
-						<div class= "medium-6 large-6 columns">
-							Kosten laufender Zinsen
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@all_assets, unit: '€') %>
 						</div>
 					</div>
 					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Kredite
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Zinsen</strong>
 						</div>
-						<div class= "medium-6 large-6 columns">
-							Kredit einnahmen
-						</div>
-					</div>
-					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Einkauf
-						</div>
-						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@interest_cost, unit: '€') %>
 						</div>
 					</div>
 					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Personal
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Kreditsumme</strong>
 						</div>
-						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@credit_sum, unit: '€') %>
+						</div>
+
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Personalkosten pro Saison</strong>
+						</div>
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@personnel_cost, unit: '€') %>
 						</div>
 					</div>
 					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Produktion
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Produktion</strong>: Wert der Ernte
 						</div>
-						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
-						</div>
-					</div>
-					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Maschinen
-						</div>
-					</div>
-						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
-						</div>
-					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Verkauf
-						</div>
-						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@harvested_crops, unit: '€') %>
 						</div>
 					</div>
 					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Endlage
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Wert deiner Maschinen</strong>
 						</div>
-						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@machinery, unit: '€') %>
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns report-columns">
+							<strong>Wert deines Anbaus</strong>
+						</div>
+						<div class= "medium-6 large-6 columns report-columns">
+							<%= number_to_currency(@field_crops, unit: '€') %>
 						</div>
 					</div>
 				</div>
@@ -100,50 +86,50 @@
 					<h3> Wichtige Zahlen auf einem Blick </h3>
 					<div class= "row">
 						<div class= "medium-6 large-6 columns">
-							Liquidationswert Ende letzten Jahres
+							<strong>Liquidationswert Ende letzten Jahres</strong>
 						</div>
 						<div class= "medium-6 large-6 columns">
-							245k Euro
-						</div>
-					</div>
-					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							Saatgut
-						</div>
-						<div class= "medium-6 large-6 columns">
-							323
+							<%= number_to_currency(@assets, unit: '€') %>
 						</div>
 					</div>
 					<div class= "row">
 						<div class= "medium-6 large-6 columns">
-							Viehbestand
+							<strong>Saatgut</strong> (geerntete + gekauftes Getreide)
 						</div>
 						<div class= "medium-6 large-6 columns">
-							Ausgaenvnsfkjnkj
+							<%= number_to_currency(@seeds, unit: '€') %>
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							<strong>Viehbestand</strong>
+						</div>
+						<div class= "medium-6 large-6 columns">
+							<%=@lifestocks%>
 						</div>
 					</div>
 						<div class= "row">
 						<div class= "medium-6 large-6 columns">
-							Personal
+							<strong>Personal</strong>
 						</div>
 						<div class= "medium-6 large-6 columns">
-							20 Mitarbeiter
-						</div>
-					</div>
-					<div class= "row">
-						<div class= "medium-6 large-6 columns">
-							bestellte Felder
-						</div>
-						<div class= "medium-6 large-6 columns">
-							3 h
+							<%= @personnel_count %> Mitarbeiter
 						</div>
 					</div>
 					<div class= "row">
 						<div class= "medium-6 large-6 columns">
-							Maschinenbesetzung
+							<strong>bestellte Felder</strong>
 						</div>
 						<div class= "medium-6 large-6 columns">
-							12
+							<%= @fields%> h
+						</div>
+					</div>
+					<div class= "row">
+						<div class= "medium-6 large-6 columns">
+							<strong> Maschinenbesetzung </strong>
+						</div>
+						<div class= "medium-6 large-6 columns">
+							<%= @machine_occupancy %>
 						</div>
 					</div>
 				</div>
