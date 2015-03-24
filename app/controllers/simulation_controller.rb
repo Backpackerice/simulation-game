@@ -8,11 +8,24 @@ class SimulationController < ApplicationController
   end
 
   def remove_sold_resources
-    #
+    current_user.crops.map do |crop|
+      crop.quantity += crop.bought + crop.sold
+      crop.bought = 0
+      crop.sold = 0
+      crop.save!
+    end
+
+    current_user.lifestocks.map do |animal|
+      animal.quantity += animal.bought + animal.sold
+      animal.bought = 0
+      animal.sold = 0
+      animal.save!
+    end
   end
 
   def update_credit
-    #increase interest
+
+    # pay credit period / installments
     # reduce duration
   end
 
@@ -26,5 +39,20 @@ class SimulationController < ApplicationController
     # preise
   end
 
+  def simulate_technical
+
+  end
+
+  def simulate_disease
+
+  end
+
+  def simulate_weather
+
+  end
+
+  def game
+    Game.current_game
+  end
   #change global price object
 end
