@@ -13,11 +13,12 @@ class Credit < ActiveRecord::Base
   def accumulated_interest
     time_since = Game.current_game.period - period
     acc_interest = 0
-    new_principal = principal
+    new_principal = self.principal
     time_since.times do
       acc_interest = new_principal * self.interest_rate
       new_principal = new_principal + (new_principal * self.interest_rate)
     end
+    binding.pry
     acc_interest
   end
 

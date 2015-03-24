@@ -37,6 +37,7 @@ class BankingController < ApplicationController
   end
 
   def credit
+    binding.pry
     credit = game.credits.create(credit_params)
 
     Liability.update(:credit, "Kredit über #{view_context.number_to_currency(credit.principal, unit: '€')}")
@@ -63,7 +64,7 @@ class BankingController < ApplicationController
 
   def credit_params
     parameters = params.require(:credit).permit(:principal, :duration, :installments)
-    parameters.merge!({period: game.period})
+    parameters.merge!({period: game.period, interest_rate: game.interest})
   end
 
   def insurance_params
