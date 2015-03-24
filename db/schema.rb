@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 20150323071841) do
 
   create_table "games", force: true do |t|
     t.integer "period"
-    t.decimal "cash",     precision: 2, scale: 0
+    t.decimal "cash",     precision: 10, scale: 0
     t.integer "user_id"
-    t.decimal "interest",                         default: 0.04
+    t.decimal "interest",                          default: 0.04
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id"

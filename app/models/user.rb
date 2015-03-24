@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   private
 
   def setup_game
-    game = Game.create(user_id: self.id, period: 1, cash: 50000.00)
+    game = Game.create(user_id: self.id, period: 1, cash: 50000)
     Game.current_game = game
     game.set_current_interest_rate
     ::Seeder.initialize_db(self)
