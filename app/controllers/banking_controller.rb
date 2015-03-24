@@ -30,8 +30,8 @@ class BankingController < ApplicationController
   def future
     future = game.futures.create(future_params)
 
-    Liability.update(:future, "Terminvertrag für #{future.item} zum Preis #{view_context.number_to_currency(future.price_per_item, unit: '€')}")
-    Event.financial(future, "Du hast in der letzten Saison einen Terminvertrag für #{future.item} zum Preis #{view_context.number_to_currency(future.price_per_item, unit: '€')} abgeschlossen")
+    Liability.update(:future, "Terminvertrag für #{future.contractual_item} zum Preis #{view_context.number_to_currency(future.price, unit: '€')}")
+    Event.financial(future, "Du hast in der letzten Saison einen Terminvertrag für #{future.contractual_item} zum Preis #{view_context.number_to_currency(future.price, unit: '€')} abgeschlossen")
 
     redirect_to action: 'index'
   end
@@ -67,12 +67,12 @@ class BankingController < ApplicationController
   end
 
   def insurance_params
-    params.require(:insurance).permit(:item, :price_per_item, :quantity)
+    parameters = params.require(:insurance).permit(:item, :price_per_item, :quantity)
     parameters.merge!({period: game.period})
   end
 
   def future_params
-    params.require(:future).permit(:contractual_item, :price, :settlement_period, :quantity)
+    parameters = params.require(:future).permit(:contractual_item, :price, :settlement_period, :quantity)
     parameters.merge!({period: game.period})
   end
 
